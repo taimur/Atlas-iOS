@@ -21,6 +21,8 @@
 #import <LayerKit/LayerKit.h>
 #import <UIKit/UIKit.h>
 #import "ATLAvatarItem.h"
+#import "ATLPresenceStatusView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 extern CGFloat const ATLAvatarImageDiameter;
@@ -68,6 +70,12 @@ extern CGFloat const ATLAvatarImageDiameter;
  @abstract Sets whether the presence status is shown for this AvatarView. Default is true.
  */
 @property (nonatomic) BOOL presenceStatusEnabled;
+
+@property (nonatomic) ATLPresenceStatusView *presenceStatusView;
+
+@property (nonatomic) UILabel *initialsLabel;
+
+@property (nonatomic) NSInteger avatarViewSizeDisplacement;
 
 /**
  @abstract Sets the avatar item, image view, and initial view to nil in preparation for reuse.

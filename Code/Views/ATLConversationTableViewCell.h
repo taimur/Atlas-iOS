@@ -31,6 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @abstract The font for the conversation label displayed in the cell. Default is 14pt system font.
  */
+@property (nonatomic) UIFont *recepientTitleLabelFont UI_APPEARANCE_SELECTOR;
+
+/**
+ @abstract The text color for the conversation label displayed in the cell. Default is black.
+ */
+@property (nonatomic) UIColor *recepientTitleLabelColor UI_APPEARANCE_SELECTOR;
+
+/**
+ @abstract The font for the conversation label displayed in the cell. Default is 14pt system font.
+ */
 @property (nonatomic) UIFont *conversationTitleLabelFont UI_APPEARANCE_SELECTOR;
 
 /**

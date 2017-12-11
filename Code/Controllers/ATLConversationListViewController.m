@@ -94,7 +94,7 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
     _deletionModes = @[@(LYRDeletionModeMyDevices), @(LYRDeletionModeAllParticipants)];
     _displaysAvatarItem = NO;
     _allowsEditing = YES;
-    _rowHeight = 76.0f;
+    _rowHeight = 110.0f;
     _shouldDisplaySearchController = YES;
     _hasAppeared = NO;
 }
@@ -250,11 +250,6 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Cannot change row height after the view has been presented" userInfo:nil];
     }
     _rowHeight = rowHeight;
-}
-
-- (void)updatePredicate:(nullable LYRPredicate *)predicate
-{
-    [self updateQueryControllerWithPredicate:predicate];
 }
 
 #pragma mark - Set Up

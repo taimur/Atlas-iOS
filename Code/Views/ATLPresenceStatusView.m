@@ -89,7 +89,7 @@ CGFloat const ATLMEndAngle = M_PI*2;
     CGContextFillPath(context);
     CGContextSaveGState(context);
 
-    CGFloat borderWidth = diameter / 6.0;
+    CGFloat borderWidth = diameter / 4.0;
     
     switch (_mode) {
         case ATLMPresenceStatusViewModeFill:

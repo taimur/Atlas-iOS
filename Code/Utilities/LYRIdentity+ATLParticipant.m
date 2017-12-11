@@ -29,7 +29,18 @@
         initials = [NSString stringWithFormat:@"%@%@", [self.firstName substringToIndex:1], [self.lastName substringToIndex:1]];
     }
     else if (self.displayName && self.displayName.length > 1) {
-      initials = [self.displayName substringToIndex:2];
+      NSArray *array = [self.displayName componentsSeparatedByString:@" "];
+      if ([array count] > 1) {
+        NSString *tempfirstName = [array objectAtIndex:0];
+        NSString *tempSecondName = [array objectAtIndex:1];
+        
+        if ([tempfirstName length] > 0 && [tempSecondName length] > 0) {
+          initials = [NSString stringWithFormat:@"%@%@", [tempfirstName substringToIndex:1], [tempSecondName substringToIndex:1]];
+        }
+      }
+      else {
+        initials = [self.displayName substringToIndex:2];
+      }
     }
     return initials;
 }
