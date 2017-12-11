@@ -19,7 +19,7 @@
 //
 #import "ATLAvatarView.h"
 #import "ATLConstants.h"
-#import "ATLPresenceStatusView.h"
+
 
 @interface ATLAvatarView ()
 
@@ -118,7 +118,7 @@ NSString *const ATLAvatarViewAccessibilityLabel = @"ATLAvatarViewAccessibilityLa
 - (void)setAvatarItem:(id<ATLAvatarItem>)avatarItem
 {
     self.imageView.image = nil;
-    
+    self.avatarViewSizeDisplacement = 6.0;
     if ([avatarItem avatarImageURL]) {
         self.initialsLabel.text = nil;
         [self loadAvatarImageWithURL:[avatarItem avatarImageURL]];
@@ -130,42 +130,42 @@ NSString *const ATLAvatarViewAccessibilityLabel = @"ATLAvatarViewAccessibilityLa
     }
     
     if (self.imageView.image == nil && avatarItem.avatarInitials) {
-        self.initialsLabel.text = avatarItem.avatarInitials;
+        self.initialsLabel.text = [avatarItem.avatarInitials uppercaseString];
     }
-  switch (avatarItem.presenceStatus) {
-    case LYRIdentityPresenceStatusAvailable:
-      self.presenceStatusView.statusColor = [UIColor colorWithRed:100.0/255.0 green:217.0/255.0 blue:176.0/255.0 alpha:1.0];
-      self.presenceStatusView.hidden = NO;
-      self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
-      break;
-    case LYRIdentityPresenceStatusBusy:
-      //self.presenceStatusView.statusColor = [UIColor colorWithRed:230.0/255.0 green:68.0/255.0 blue:63.0/255.0 alpha:1.0];
-      self.presenceStatusView.statusColor = [UIColor clearColor];
-      self.presenceStatusView.hidden = YES;
-      
-      self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
-      break;
-    case LYRIdentityPresenceStatusAway:
-      //self.presenceStatusView.statusColor = [UIColor colorWithRed:247.0/255.0 green:202.0/255.0 blue:64.0/255.0 alpha:1.0];
-      self.presenceStatusView.statusColor = [UIColor clearColor];
-      self.presenceStatusView.hidden = YES;
-      self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
-      break;
-    case LYRIdentityPresenceStatusInvisible:
-      //self.presenceStatusView.statusColor = [UIColor colorWithRed:79.0/255.0 green:191.0/255.0 blue:98.0/255.0 alpha:1.0];
-      self.presenceStatusView.statusColor = [UIColor clearColor];
-      self.presenceStatusView.hidden = YES;
-      
-      self.presenceStatusView.mode = ATLMPresenceStatusViewModeBordered;
-      break;
-    case LYRIdentityPresenceStatusOffline:
-    default:
-      //self.presenceStatusView.statusColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:156.0/255.0 alpha:1.0];
-      self.presenceStatusView.statusColor = [UIColor clearColor];
-      self.presenceStatusView.hidden = YES;
-      self.presenceStatusView.mode = ATLMPresenceStatusViewModeBordered;
-      break;
-  }
+    switch (avatarItem.presenceStatus) {
+        case LYRIdentityPresenceStatusAvailable:
+            self.presenceStatusView.statusColor = [UIColor colorWithRed:100.0/255.0 green:217.0/255.0 blue:176.0/255.0 alpha:1.0];
+            self.presenceStatusView.hidden = NO;
+            self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
+            break;
+        case LYRIdentityPresenceStatusBusy:
+            //self.presenceStatusView.statusColor = [UIColor colorWithRed:230.0/255.0 green:68.0/255.0 blue:63.0/255.0 alpha:1.0];
+            self.presenceStatusView.statusColor = [UIColor clearColor];
+            self.presenceStatusView.hidden = YES;
+        
+            self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
+            break;
+        case LYRIdentityPresenceStatusAway:
+            //self.presenceStatusView.statusColor = [UIColor colorWithRed:247.0/255.0 green:202.0/255.0 blue:64.0/255.0 alpha:1.0];
+            self.presenceStatusView.statusColor = [UIColor clearColor];
+            self.presenceStatusView.hidden = YES;
+            self.presenceStatusView.mode = ATLMPresenceStatusViewModeFill;
+            break;
+        case LYRIdentityPresenceStatusInvisible:
+            //self.presenceStatusView.statusColor = [UIColor colorWithRed:79.0/255.0 green:191.0/255.0 blue:98.0/255.0 alpha:1.0];
+            self.presenceStatusView.statusColor = [UIColor clearColor];
+            self.presenceStatusView.hidden = YES;
+        
+            self.presenceStatusView.mode = ATLMPresenceStatusViewModeBordered;
+            break;
+        case LYRIdentityPresenceStatusOffline:
+        default:
+            //self.presenceStatusView.statusColor = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:156.0/255.0 alpha:1.0];
+            self.presenceStatusView.statusColor = [UIColor clearColor];
+            self.presenceStatusView.hidden = YES;
+            self.presenceStatusView.mode = ATLMPresenceStatusViewModeBordered;
+            break;
+    }
 
     _avatarItem = avatarItem;
 }
@@ -184,7 +184,7 @@ NSString *const ATLAvatarViewAccessibilityLabel = @"ATLAvatarViewAccessibilityLa
 
 - (void)setImageViewBackgroundColor:(UIColor *)imageViewBackgroundColor
 {
-    self.backgroundColor = imageViewBackgroundColor;
+    self.imageView.backgroundColor = imageViewBackgroundColor;
     _imageViewBackgroundColor = imageViewBackgroundColor;
 }
 
@@ -249,30 +249,30 @@ NSString *const ATLAvatarViewAccessibilityLabel = @"ATLAvatarViewAccessibilityLa
 
 - (void)layoutSubviews
 {
-  [super layoutSubviews];
+    [super layoutSubviews];
   
-  CGRect myBounds = self.bounds;
-  myBounds.size.width = self.bounds.size.width + self.avatarViewSizeDisplacement;
-  myBounds.size.height = self.bounds.size.height + self.avatarViewSizeDisplacement;
+    CGRect myBounds = self.bounds;
+    myBounds.size.width = self.bounds.size.width + self.avatarViewSizeDisplacement;
+    myBounds.size.height = self.bounds.size.height + self.avatarViewSizeDisplacement;
   
-  // Image View
-  self.imageView.frame = CGRectMake(CGRectGetMinX(myBounds), CGRectGetMinY(myBounds), CGRectGetWidth(myBounds), CGRectGetHeight(myBounds));
-  
-  CGFloat avatarViewDiameter = MIN(CGRectGetWidth(self.imageView.bounds), CGRectGetHeight(self.imageView.bounds));
-  self.imageView.layer.cornerRadius = avatarViewDiameter * 0.5;
-  
-  // Initials Label
-  self.initialsLabel.frame = CGRectInset(myBounds, 3, 3);
-  
-  // Presence Status View
-  // The width of the presence status is 0.4 the height of the AvatarView
-  CGFloat width = myBounds.size.height * 0.4;
-  self.presenceStatusView.frame = CGRectMake(
-                                             myBounds.size.width  - width + width/3,
-                                             myBounds.size.height - width + width/3,
-                                             width - width/2 +2,
-                                             width - width/2 +2
-                                             );
+    // Image View
+    self.imageView.frame = CGRectMake(CGRectGetMinX(myBounds), CGRectGetMinY(myBounds), CGRectGetWidth(myBounds), CGRectGetHeight(myBounds));
+    
+    CGFloat avatarViewDiameter = MIN(CGRectGetWidth(self.imageView.bounds), CGRectGetHeight(self.imageView.bounds));
+    self.imageView.layer.cornerRadius = avatarViewDiameter * 0.5;
+
+    // Initials Label
+    self.initialsLabel.frame = CGRectInset(myBounds, 3, 3);
+    
+    // Presence Status View
+    // The width of the presence status is 0.4 the height of the AvatarView
+    CGFloat width = myBounds.size.height * 0.4;
+    self.presenceStatusView.frame = CGRectMake(
+                                               myBounds.size.width  - width + width/3,
+                                               myBounds.size.height - width + width/3,
+                                               width - width/2 +2,
+                                               width - width/2 +2
+                                               );
 }
     
 @end

@@ -23,7 +23,6 @@
 #import "ATLAvatarItem.h"
 #import "ATLPresenceStatusView.h"
 
-
 NS_ASSUME_NONNULL_BEGIN
 extern CGFloat const ATLAvatarImageDiameter;
 
@@ -76,7 +75,6 @@ extern CGFloat const ATLAvatarImageDiameter;
 @property (nonatomic) UILabel *initialsLabel;
 
 @property (nonatomic) NSInteger avatarViewSizeDisplacement;
-
 /**
  @abstract Sets the avatar item, image view, and initial view to nil in preparation for reuse.
  */

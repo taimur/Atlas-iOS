@@ -182,5 +182,6 @@ extern NSString *const ATLMessageInputToolbarAccessibilityLabel;
  */
 @property (nonatomic, weak) UIViewController *containerViewController;
 
+- (void)configureRightAccessoryButtonState;
 @end
 NS_ASSUME_NONNULL_END
