@@ -1274,37 +1274,13 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     // Prevent scrolling if user has scrolled up into the conversation history.
     BOOL shouldScrollToBottom = [self shouldScrollToBottom];
     
-    // ensure the animation's queue will resume
+    // simply reloading data for collection to avoid crashes
     if (self.collectionView) {
-        dispatch_suspend(self.animationQueue);
-        [self.collectionView performBatchUpdates:^{
-            [self.conversationDataSource updateMessages];
-            for (ATLDataSourceChange *change in objectChanges) {
-                switch (change.type) {
-                    case LYRQueryControllerChangeTypeInsert:
-                        [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:change.newIndex]];
-                        break;
-                        
-                    case LYRQueryControllerChangeTypeMove:
-                        [self.collectionView moveSection:change.currentIndex toSection:change.newIndex];
-                        break;
-                        
-                    case LYRQueryControllerChangeTypeDelete:
-                        [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:change.currentIndex]];
-                        break;
-                        
-                    case LYRQueryControllerChangeTypeUpdate:
-                        // If we call reloadSections: for a section that is already being animated due to another move (e.g. moving section 17 to 16 causes section 16 to be moved/animated to 17 and then we also reload section 16), UICollectionView will throw an exception. But since all onscreen sections will be reconfigured (see below) we don't need to reload the sections here anyway.
-                        break;
-                        
-                    default:
-                        break;
-                }
-            }
-        } completion:^(BOOL finished) {
-            dispatch_resume(self.animationQueue);
-        }];
+      
+      [self.conversationDataSource updateMessages];
+      [self.collectionView reloadData];
     }
+  
     [self configureCollectionViewElements];
     
     if (shouldScrollToBottom)  {
