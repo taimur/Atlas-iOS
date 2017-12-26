@@ -529,11 +529,15 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
 
 - (void)queryControllerDidChangeContent:(LYRQueryController *)queryController
 {
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:self.deletedRowIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView insertRowsAtIndexPaths:self.insertedRowIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView reloadRowsAtIndexPaths:self.updatedRowIndexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+  
+  [UIView transitionWithView:self.tableView
+                    duration:0.2f
+                     options:UIViewAnimationOptionTransitionCrossDissolve
+                  animations:^{
+                    
+                    [self.tableView reloadData];
+                    
+                  } completion:nil];
     
     self.insertedRowIndexPaths = nil;
     self.deletedRowIndexPaths = nil;
