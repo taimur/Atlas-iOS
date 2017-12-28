@@ -166,7 +166,7 @@ static CGFloat const ATLChevronIconViewRightPadding = 14.0f;
     NSBundle *resourcesBundle = ATLResourcesBundle();
     _chevronIconView.image = [UIImage imageNamed:@"chevron" inBundle:resourcesBundle compatibleWithTraitCollection:nil];
     _chevronIconView.hidden = YES;
-    //[self.contentView addSubview:_chevronIconView];
+    [self.contentView addSubview:_chevronIconView];
     
     [self configureConversationImageViewLayoutContraints];
     [self configureconversationTitleLabelLayoutContraints];
